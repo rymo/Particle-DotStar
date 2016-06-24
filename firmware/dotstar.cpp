@@ -218,10 +218,6 @@ void Adafruit_DotStar::show(void) {
   //__enable_irq();
 }
 
-inline void Adafruit_DotStar::clear() { // Write 0s (off) to full pixel buffer
-  memset(pixels, 0, numLEDs * 3);
-}
-
 // Set pixel color, separate R,G,B values (0-255 ea.)
 void Adafruit_DotStar::setPixelColor(
  uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
