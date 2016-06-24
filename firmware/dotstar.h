@@ -84,4 +84,8 @@ class Adafruit_DotStar {
 
 };
 
+inline void Adafruit_DotStar::clear() { // Write 0s (off) to full pixel buffer
+  memset(pixels, 0, numLEDs * 3);
+}
+
 #endif // _ADAFRUIT_DOT_STAR_H_
