@@ -257,30 +257,3 @@ uint16_t Adafruit_DotStar::numPixels(void) { // Ret. strip length
   return numLEDs;
 }
 
-// Set global strip brightness.  This does not have an immediate effect;
-// must be followed by a call to show().  Not a fan of this...for various
-// reasons I think it's better handled in one's sketch, but it's here for
-// parity with the NeoPixel library.  Good news is that brightness setting
-// in this library is 'non destructive' -- it's applied as color data is
-// being issued to the strip, not during setPixel(), and also means that
-// getPixelColor() returns the exact value originally stored.
-inline void Adafruit_DotStar::setBrightness(uint8_t b) {
-  // Stored brightness value is different than what's passed.  This
-  // optimizes the actual scaling math later, allowing a fast 8x8-bit
-  // multiply and taking the MSB.  'brightness' is a uint8_t, adding 1
-  // here may (intentionally) roll over...so 0 = max brightness (color
-  // values are interpreted literally; no scaling), 1 = min brightness
-  // (off), 255 = just below max brightness.
-  brightness = b + 1;
-}
-
-inline uint8_t Adafruit_DotStar::getBrightness(void) const {
-  return brightness - 1; // Reverse above operation
-}
-
-// Return pointer to the library's pixel data buffer.  Use carefully,
-// much opportunity for mayhem.  It's mostly for code that needs fast
-// transfers, e.g. SD card to LEDs.  Color data is in BGR order.
-inline uint8_t *Adafruit_DotStar::getPixels(void) const {
-  return pixels;
-}
